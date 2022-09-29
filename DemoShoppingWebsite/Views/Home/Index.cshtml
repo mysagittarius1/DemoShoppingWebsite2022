@@ -1,0 +1,12 @@
+﻿@using DemoShoppingWebsite.Models
+@model IEnumerable<table_Product>
+@{
+    ViewBag.Title = "商品瀏覽";
+}
+
+<div class="row" style="margin-top:10px">
+    @foreach (var item in Model)
+    {
+        @Html.Partial("_ProductList", item)
+    }
+</div>
