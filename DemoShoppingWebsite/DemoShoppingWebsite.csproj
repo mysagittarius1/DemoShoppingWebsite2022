@@ -131,10 +131,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConnectStringService.cs" />
+    <Compile Include="Models\dbShoppingCarAzureEntities.cs" />
+    <Compile Include="Models\MyEncrypt.cs" />
     <Compile Include="Models\ShoppingCar.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -266,9 +268,7 @@
     <Content Include="Views\Member\OrderDetail.cshtml" />
     <Content Include="Views\Shared\_ProductList.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Test\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

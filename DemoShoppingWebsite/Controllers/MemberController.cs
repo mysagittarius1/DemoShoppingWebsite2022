@@ -11,7 +11,8 @@ namespace DemoShoppingWebsite.Controllers
     [Authorize]
     public class MemberController : Controller
     {
-        dbShoppingCarAzureEntities db = new dbShoppingCarAzureEntities();
+        //dbShoppingCarAzureEntities db = new dbShoppingCarAzureEntities();
+        dbShoppingCarAzureEntities db = ConnectStringService.CreateDBContext();
         // GET: Member
         public ActionResult Index()
         {
