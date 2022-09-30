@@ -19,8 +19,6 @@ namespace DemoShoppingWebsite.Controllers
         //[Route("Index")]
         public ActionResult Index()
         { 
-            MyEncrypt myEncrypt = new MyEncrypt();
-            var x = myEncrypt.Encrypt("Jh1gf2ds3a");
             var products = db.table_Product.OrderByDescending(m => m.Id).ToList();
             return View(products);
         }
