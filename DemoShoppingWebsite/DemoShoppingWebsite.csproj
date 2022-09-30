@@ -136,6 +136,7 @@
     </Compile>
     <Compile Include="Models\ConnectStringService.cs" />
     <Compile Include="Models\dbShoppingCarAzureEntities.cs" />
+    <Compile Include="Models\EncryptService.cs" />
     <Compile Include="Models\MyEncrypt.cs" />
     <Compile Include="Models\ShoppingCar.Context.cs">
       <AutoGen>True</AutoGen>
