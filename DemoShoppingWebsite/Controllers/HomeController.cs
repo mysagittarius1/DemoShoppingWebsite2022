@@ -65,8 +65,7 @@ namespace DemoShoppingWebsite.Controllers
 
             Session["Welcome"] = $"{member.Name} 您好";
 
-            FormsAuthentication.RedirectFromLoginPage(userid, true);
-
+            FormsAuthentication.RedirectFromLoginPage(userid, false);
             return RedirectToAction("Index", "Member");
         }
     }
