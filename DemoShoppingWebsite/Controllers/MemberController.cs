@@ -16,6 +16,7 @@ namespace DemoShoppingWebsite.Controllers
         // GET: Member
         public ActionResult Index()
         {
+            Session["Welcome"] = $"{User.Identity.Name},您好";
             var products = db.table_Product.OrderByDescending(m => m.Id).ToList();
             return View("../Home/Index", "_LayoutMember", products);
         }

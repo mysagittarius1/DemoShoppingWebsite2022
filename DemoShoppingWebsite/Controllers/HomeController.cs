@@ -3,6 +3,7 @@ using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -18,9 +19,12 @@ namespace DemoShoppingWebsite.Controllers
         //[Route()]
         //[Route("Index")]
         public ActionResult Index()
-        { 
+        {
+            string user = User.Identity.Name;
             var products = db.table_Product.OrderByDescending(m => m.Id).ToList();
-            return View(products);
+            if (user == string.Empty)
+                return View(products);
+            else return RedirectToAction("Index", "Member");
         }
 
         public ActionResult Register()
@@ -54,7 +58,7 @@ namespace DemoShoppingWebsite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string userid,string password)
+        public ActionResult Login(string userid,string password,bool isRemember)
         {
             var member = db.table_Member.Where(m => m.UserId == userid && m.Password == password).FirstOrDefault();
             if (member == null)
@@ -63,9 +67,7 @@ namespace DemoShoppingWebsite.Controllers
                 return View();
             }
 
-            Session["Welcome"] = $"{member.Name} 您好";
-
-            FormsAuthentication.RedirectFromLoginPage(userid, false);
+            FormsAuthentication.RedirectFromLoginPage(userid, isRemember);
             return RedirectToAction("Index", "Member");
         }
     }
