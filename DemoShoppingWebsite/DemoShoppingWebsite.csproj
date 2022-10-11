@@ -183,10 +183,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\dbShoppingCar.mdf" />
-    <Content Include="App_Data\dbShoppingCar_log.ldf">
-      <DependentUpon>dbShoppingCar.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -195,6 +191,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="image\C0001.jpg" />
+    <Content Include="image\C0002.jpg" />
+    <Content Include="image\C0003.jpg" />
+    <Content Include="image\C0004.jpg" />
+    <Content Include="image\C0005.jpg" />
+    <Content Include="image\D0001.jpg" />
+    <Content Include="image\D0002.jpg" />
+    <Content Include="image\D0003.jpg" />
+    <Content Include="image\D0004.jpg" />
+    <Content Include="image\D0005.jpg" />
+    <Content Include="image\D0006.jpg" />
+    <Content Include="image\E0001.jpg" />
+    <Content Include="image\E0002.jpg" />
+    <Content Include="image\E0003.jpg" />
+    <Content Include="image\E0004.jpg" />
+    <Content Include="image\E0005.jpg" />
+    <Content Include="image\F0001.jpg" />
+    <Content Include="image\F0002.jpg" />
     <Content Include="image\nintendo_switch.jpg" />
     <Content Include="image\ringfit.jpg" />
     <Content Include="image\switch_controller.jpg" />
@@ -270,7 +284,9 @@
     <Content Include="Views\Member\OrderDetail.cshtml" />
     <Content Include="Views\Shared\_ProductList.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
