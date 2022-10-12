@@ -13,12 +13,14 @@ namespace DemoShoppingWebsite.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class table_Member
     {
         public int Id { get; set; }
 
         [Required]
+        [StringLength(30,MinimumLength =6)]
         [DisplayName("帳號")]
         public string UserId { get; set; }
 
@@ -26,11 +28,18 @@ namespace DemoShoppingWebsite.Models
         [DisplayName("密碼")]
         public string Password { get; set; }
 
+        [NotMapped]
+        [Required]
+        [CompareAttribute(nameof(Password))]
+        [DisplayName("再次輸入密碼")]
+        public string PasswordCheck { get; set; }
+
         [Required]
         [DisplayName("姓名")]
         public string Name { get; set; }
 
         [Required]
+        [EmailAddress]
         [DisplayName("電子信箱")]
         public string Email { get; set; }
     }
