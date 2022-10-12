@@ -18,13 +18,22 @@ namespace DemoShoppingWebsite.Controllers
 
         //[Route()]
         //[Route("Index")]
-        public ActionResult Index()
+        public ActionResult Index(string text = "")
         {
             string user = User.Identity.Name;
-            var products = db.table_Product.OrderByDescending(m => m.Id).ToList();
+            var products = db.table_Product
+                    .Where(p=>p.Name.Contains(text))
+                    .OrderByDescending(m => m.Id).ToList();
             if (user == string.Empty)
                 return View(products);
-            else return RedirectToAction("Index", "Member");
+            else
+                return View("../Home/Index", "_LayoutMember", products);
+        }
+
+        [HttpPost]
+        public ActionResult Query(string SearchContent)
+        {
+            return RedirectToAction("Index",new { text = SearchContent });
         }
 
         public ActionResult Register()
@@ -58,7 +67,7 @@ namespace DemoShoppingWebsite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string userid,string password,bool isRemember)
+        public ActionResult Login(string userid, string password, bool isRemember)
         {
             var member = db.table_Member.Where(m => m.UserId == userid && m.Password == password).FirstOrDefault();
             if (member == null)

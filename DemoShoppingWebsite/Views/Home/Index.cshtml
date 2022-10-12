@@ -3,8 +3,10 @@
 @{
     ViewBag.Title = "商品瀏覽";
 }
+
+@*Search Bar*@
 <div style="display:flex ;justify-content:center;margin:20px;">
-    <form action="/" method="post" class="" style="display: flex; justify-content: center;">
+    <form action="~/Home/Query" method="post" style="display: flex; justify-content: center;">
         <div class="form-inline" style="display:flex;">
             <input type="text" class="form-control" placeholder="Search Something..." name="SearchContent" >
             <input type="submit" value="搜尋" class="btn btn-toolbar" style="margin-left:1px;" />

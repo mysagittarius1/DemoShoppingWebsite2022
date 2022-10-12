@@ -1,15 +1,31 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Coding小僧購物網</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .custom {
+            color: gold !important
+        }
+
+            .custom:hover {
+                color: white !important
+            }
+
+        .custom-link {
+        }
+
+            .custom-link:hover {
+                background-color: lightpink !important
+            }
+    </style>
 </head>
 <body>
-    <div class="navbar navbar-fixed-top bg-info">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:darkcyan">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="其他選項">
@@ -17,14 +33,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Coding小僧購物網-會員專區", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Coding小僧購物網-會員專區", "Index", "Home", new { area = "" }, new { @class = "navbar-brand custom" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("產品列表", "Index", "Member")</li>
-                    <li>@Html.ActionLink("購物車", "ShoppingCar", "Member")</li>
-                    <li>@Html.ActionLink("訂單", "OrderList", "Member")</li>
-                    <li>@Html.ActionLink("登出", "LogOut", "Member")</li>
+                    <li>@Html.ActionLink("產品列表", "Index", "Member", new { @class = "custom custom-link" })</li>
+                    <li>@Html.ActionLink("購物車", "ShoppingCar", "Member", new { @class = "custom custom-link" })</li>
+                    <li>@Html.ActionLink("訂單", "OrderList", "Member", new { @class = "custom custom-link" })</li>
+                    <li>@Html.ActionLink("登出", "LogOut", "Member", new { @class = "custom custom-link" })</li>
                     <li><a href="#">@Session["Welcome"]</a></li>
                 </ul>
             </div>
