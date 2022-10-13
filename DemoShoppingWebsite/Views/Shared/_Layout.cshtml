@@ -1,25 +1,27 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Coding小僧購物網</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
-        .custom{
-            color:gold !important
+        .custom {
+            color: gold !important
         }
+
             .custom:hover {
                 color: white !important
             }
-        .custom-link{
 
+        .custom-link {
         }
-        .custom-link:hover{
-            background-color:lightpink !important
-        }
+
+            .custom-link:hover {
+                background-color: lightpink !important
+            }
     </style>
 </head>
 <body>
@@ -35,7 +37,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("產品列表", "Index", "Home", new { area = "" }, new {@class= "custom custom-link" })</li>
+                    <li>@Html.ActionLink("產品列表", "Index", "Home", new { area = "" }, new { @class = "custom custom-link" })</li>
                     <li>@Html.ActionLink("註冊", "Register", "Home", new { area = "" }, new { @class = "custom custom-link" })</li>
                     <li>@Html.ActionLink("登入", "Login", "Home", new { area = "" }, new { @class = "custom custom-link" })</li>
                 </ul>
