@@ -20,6 +20,7 @@ namespace DemoShoppingWebsite.Controllers
         //[Route("Index")]
         public ActionResult Index(string text = "")
         {
+            var x= EncryptService.EncryptBase64("AIzaSyCh4lOztD7qX5zF6_DHH1sECwYUkgVddtY");
             string user = User.Identity.Name;
             var products = db.table_Product
                     .Where(p=>p.Name.Contains(text))
@@ -78,6 +79,11 @@ namespace DemoShoppingWebsite.Controllers
 
             FormsAuthentication.RedirectFromLoginPage(userid, isRemember);
             return RedirectToAction("Index", "Member");
+        }
+
+        public ActionResult GoogleMap()
+        {
+            return View();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@using DemoShoppingWebsite.Helpers;
 @{
     ViewBag.Title = "GoogleMap";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,5 +36,6 @@
         });
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3SYp-CCif8tN9aT0lGa54YvEQoa-K6_4&callback=initMap"
-        async defer></script>
+@Html.GoogleMapScript("https://maps.googleapis.com/maps/api/js?key=*&callback=initMap", "sxCT6DDEJ8i0ESnDsVhTXTZV8xTyfd+HSNHDEWFxHwYQ4ldTwlfnbwaCxfAY+C3U")
+@*<script src="https://maps.googleapis.com/maps/api/js?key=*&callback=initMap"
+        async defer></script>*@

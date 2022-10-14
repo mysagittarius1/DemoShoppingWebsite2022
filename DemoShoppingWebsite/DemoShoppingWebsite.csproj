@@ -134,6 +134,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ScriptHelper.cs" />
     <Compile Include="Models\ConnectStringService.cs" />
     <Compile Include="Models\dbShoppingCarAzureEntities.cs" />
     <Compile Include="Models\EncryptService.cs" />
@@ -381,6 +382,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\GoogleMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
