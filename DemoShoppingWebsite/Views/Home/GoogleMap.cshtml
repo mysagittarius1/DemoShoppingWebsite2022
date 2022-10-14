@@ -36,6 +36,4 @@
         });
     }
 </script>
-@Html.GoogleMapScript("https://maps.googleapis.com/maps/api/js?key=*&callback=initMap", "sxCT6DDEJ8i0ESnDsVhTXTZV8xTyfd+HSNHDEWFxHwYQ4ldTwlfnbwaCxfAY+C3U")
-@*<script src="https://maps.googleapis.com/maps/api/js?key=*&callback=initMap"
-        async defer></script>*@
+@Html.GoogleMapScript("https://maps.googleapis.com/maps/api/js?key=*&callback=initMap", System.Configuration.ConfigurationManager.AppSettings["googlemap_key"])
