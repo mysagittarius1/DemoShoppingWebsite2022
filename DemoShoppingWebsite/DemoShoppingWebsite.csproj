@@ -137,10 +137,15 @@
     <Compile Include="Helpers\ScriptHelper.cs" />
     <Compile Include="Models\ConnectStringService.cs" />
     <Compile Include="Models\dbShoppingCarAzureEntities.cs" />
-    <Compile Include="Models\EFGenericRepository.cs" />
     <Compile Include="Models\EncryptService.cs" />
+    <Compile Include="Models\Interface\IMemberRepository.cs" />
+    <Compile Include="Models\Interface\IOrderDetailRepository.cs" />
+    <Compile Include="Models\Interface\IOrderRepository.cs" />
     <Compile Include="Models\Interface\IProductRepository.cs" />
     <Compile Include="Models\Interface\IRepository.cs" />
+    <Compile Include="Models\Repository\MemberRepository.cs" />
+    <Compile Include="Models\Repository\OrderDetailRepository.cs" />
+    <Compile Include="Models\Repository\OrderRepository.cs" />
     <Compile Include="Models\Repository\ProductRepository.cs" />
     <Compile Include="Models\ShoppingCar.Context.cs">
       <AutoGen>True</AutoGen>

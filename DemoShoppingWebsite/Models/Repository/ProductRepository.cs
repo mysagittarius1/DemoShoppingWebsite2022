@@ -8,44 +8,82 @@ using System.Web.DynamicData;
 
 namespace DemoShoppingWebsite.Models.Repository
 {
-    public class ProductRepository : IProductRepository,IDisposable
+    public class ProductRepository : IProductRepository
     {
-        protected dbShoppingCarAzureEntities db = new dbShoppingCarAzureEntities();
+        protected dbShoppingCarAzureEntities db = ConnectStringService.CreateDBContext();
         public void Create(table_Product product)
         {
             db.table_Product.Add(product);
             this.SaveChanges();
         }
 
-        public void Delete(table_Product product)
+        public void Delete(string productId)
         {
-            throw new NotImplementedException();
+            var product = db.table_Product.Find(productId);
+            if (product != null)
+            {
+                db.table_Product.Remove(product);
+                this.SaveChanges();
+            }
+            else
+            {
+                throw new ArgumentNullException("product");
+            }
         }
 
-        public void Dispose()
+        public IEnumerable<table_Product> Query(string text = "")
         {
-            throw new NotImplementedException();
+            var products = db.table_Product
+                    .Where(p => p.Name.Contains(text))
+                    .OrderByDescending(m => m.Id).ToList();
+            return products;
         }
 
         public table_Product Get(string productId)
         {
-            throw new NotImplementedException();
+            return db.table_Product.Find(productId);
         }
 
-        public IQueryable<table_Product> GetAll()
+        public IEnumerable<table_Product> GetAll()
         {
-            throw new NotImplementedException();
+            var products = db.table_Product.OrderByDescending(x => x.ProductId);
+            return products.ToList();
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            db.SaveChanges();
         }
 
         public void Update(table_Product product)
         {
-            db.Entry(product).State = EntityState.Modified;
-            this.SaveChanges();
+            var item = db.table_Product.
+                Where(x => x.ProductId == product.ProductId).FirstOrDefault();
+            if (item == null)
+            {
+                throw new ArgumentNullException();
+            }
+            else
+            {
+                item.Name = product.Name;
+                item.Price = product.Price;
+                item.ProductId = product.ProductId;
+                item.Image = product.Image;
+                this.SaveChanges();
+
+                //db.Entry(product).State = EntityState.Modified;
+                //this.SaveChanges();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IQueryable<table_Product> IRepository<table_Product>.GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

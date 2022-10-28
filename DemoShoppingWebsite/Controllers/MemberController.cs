@@ -1,4 +1,6 @@
 ﻿using DemoShoppingWebsite.Models;
+using DemoShoppingWebsite.Models.Interface;
+using DemoShoppingWebsite.Models.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +13,21 @@ namespace DemoShoppingWebsite.Controllers
     [Authorize]
     public class MemberController : Controller
     {
-        //dbShoppingCarAzureEntities db = new dbShoppingCarAzureEntities();
-        dbShoppingCarAzureEntities db = ConnectStringService.CreateDBContext();
+        private ProductRepository _productRepository;
+        private OrderRepository _orderRepository;
+        private OrderDetailRepository _orderDetailRepository;
+
+        public MemberController()
+        {
+            _productRepository = new ProductRepository();
+            _orderRepository = new OrderRepository();
+            _orderDetailRepository = new OrderDetailRepository();
+        }
         // GET: Member
         public ActionResult Index()
         {
             Session["Welcome"] = $"{User.Identity.Name},您好";
-            var products = db.table_Product.OrderByDescending(m => m.Id).ToList();
+            var products = _productRepository.GetAll();
             return View("../Home/Index", "_LayoutMember", products);
         }
 
@@ -32,7 +42,7 @@ namespace DemoShoppingWebsite.Controllers
         {
             string UserId = User.Identity.Name;
 
-            var orderDetails = db.table_OrderDetail.Where(m => m.UserId == UserId && m.IsApproved == "否").ToList();
+            var orderDetails = _orderDetailRepository.GetOrderDetails(UserId);
             return View(orderDetails);
         }
 
@@ -40,41 +50,13 @@ namespace DemoShoppingWebsite.Controllers
         {
             //取得目前通過驗證的使用者名稱
             string userId = User.Identity.Name;
-
-            //取得該使用者目前購物車內是否已有此商品，且尚未形成訂單的資料
-            var currentCar = db.table_OrderDetail
-                .Where(m => m.ProductId == ProductId && m.IsApproved == "否" && m.UserId == userId).FirstOrDefault();
-            if (currentCar == null)
-            {
-                //如果篩選條件資料為null，代表要新增全新一筆訂單明細資料
-                //將產品資料欄位一一對照至訂單明細的欄位
-                var product = db.table_Product.Where(m => m.ProductId == ProductId).FirstOrDefault();
-                var orderDetail = new table_OrderDetail();
-                orderDetail.UserId = userId;
-                orderDetail.ProductId = product.ProductId;
-                orderDetail.Name = product.Name;
-                orderDetail.Price = product.Price;
-                orderDetail.Quantity = 1;
-                orderDetail.IsApproved = "否";
-                db.table_OrderDetail.Add(orderDetail);
-            }
-            else
-            {
-                //如果購物車已有此商品，僅需將數量加1
-                currentCar.Quantity++;
-            }
-
-            //儲存資料庫並導至購物車檢視頁面
-            db.SaveChanges();
+            _orderDetailRepository.AddToCar(userId, ProductId);
             return RedirectToAction("ShoppingCar");
         }
 
         public ActionResult DeleteCar(int Id)
         {
-            var orderDetails = db.table_OrderDetail.Where(m => m.Id == Id).FirstOrDefault();
-
-            db.table_OrderDetail.Remove(orderDetails);
-            db.SaveChanges();
+           _orderDetailRepository.Delete(Id);
             return RedirectToAction("ShoppingCar");
         }
 
@@ -82,39 +64,20 @@ namespace DemoShoppingWebsite.Controllers
         public ActionResult ShoppingCar(string Receiver, string Email, string Address)
         {
             string userId = User.Identity.Name;
-            string guid = Guid.NewGuid().ToString(); //產生隨機訂單編號
-
-            //加入訂單至 table_Order 資料表
-            var order = new table_Order();
-            order.OrderGuid = guid;
-            order.UserId = userId;
-            order.Receiver = Receiver;
-            order.Email = Email;
-            order.Address = Address;
-            order.Date = DateTime.Now;
-            db.table_Order.Add(order);
-
-            //訂單加入後，需一併更新訂單明細內容
-            var carList = db.table_OrderDetail.Where(m => m.IsApproved == "否" && m.UserId == userId).ToList();
-            foreach (var item in carList)
-            {
-                item.OrderGuid = guid;
-                item.IsApproved = "是";
-            }
-            db.SaveChanges();
+            _orderDetailRepository.AddNewOrder(Receiver, Email, Address, userId);
             return RedirectToAction("OrderList");
         }
 
         public ActionResult OrderList()
         {
             string userId = User.Identity.Name;
-            var orders = db.table_Order.Where(m => m.UserId == userId).OrderByDescending(m => m.Date).ToList();
+            var orders = _orderRepository.GetMemberOrders(userId);
             return View(orders);
         }
 
         public ActionResult OrderDetail(string OrderGuid)
         {
-            var orderDetails = db.table_OrderDetail.Where(m => m.OrderGuid == OrderGuid).ToList();
+            var orderDetails = _orderDetailRepository.GetByGuid(OrderGuid);
             return View(orderDetails);
         }
     }

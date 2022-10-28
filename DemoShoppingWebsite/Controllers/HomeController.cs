@@ -1,4 +1,6 @@
 ﻿using DemoShoppingWebsite.Models;
+using DemoShoppingWebsite.Models.Interface;
+using DemoShoppingWebsite.Models.Repository;
 using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
@@ -10,30 +12,32 @@ using System.Web.Security;
 
 namespace DemoShoppingWebsite.Controllers
 {
-    //[RoutePrefix("Main")]
     public class HomeController : Controller
     {
-        //dbShoppingCarAzureEntities db = new dbShoppingCarAzureEntities();
-        dbShoppingCarAzureEntities db = ConnectStringService.CreateDBContext();
+        private ProductRepository _productRepository;
+        private MemberRepository _memberRepository;
 
-        //[Route()]
-        //[Route("Index")]
+        public HomeController()
+        {
+            _productRepository = new ProductRepository();
+            _memberRepository = new MemberRepository();
+        }
+
         public ActionResult Index(string text = "")
         {
             string user = User.Identity.Name;
-            var products = db.table_Product
-                    .Where(p=>p.Name.Contains(text))
-                    .OrderByDescending(m => m.Id).ToList();
+            var products = _productRepository.Query(text);
+
             if (user == string.Empty)
                 return View(products);
             else
                 return View("../Home/Index", "_LayoutMember", products);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Query(string SearchContent)
         {
-            return RedirectToAction("Index",new { text = SearchContent });
+            return RedirectToAction("Index", new { text = SearchContent });
         }
 
         public ActionResult Register()
@@ -49,12 +53,10 @@ namespace DemoShoppingWebsite.Controllers
                 return View();
             }
 
-            var member = db.table_Member.Where(m => m.UserId == Member.UserId).FirstOrDefault();
+            var member = _memberRepository.Get(Member.UserId);
             if (member == null)
             {
-                db.table_Member.Add(Member);
-                db.SaveChanges();
-
+                _memberRepository.Create(member);
                 return RedirectToAction("Login");
             }
             ViewBag.Message = "帳號已被使用，請重新註冊";
@@ -69,7 +71,7 @@ namespace DemoShoppingWebsite.Controllers
         [HttpPost]
         public ActionResult Login(string userid, string password, bool isRemember)
         {
-            var member = db.table_Member.Where(m => m.UserId == userid && m.Password == password).FirstOrDefault();
+            var member = _memberRepository.GetUser(userid, password);
             if (member == null)
             {
                 ViewBag.Message = "帳號 or 密碼錯誤，請重新確認登入";

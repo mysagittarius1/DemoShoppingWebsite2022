@@ -8,17 +8,13 @@ using System.Threading.Tasks;
 
 namespace DemoShoppingWebsite.Models.Interface
 {
-    public interface IRepository<T>
+    public interface IRepository<TEntity> where TEntity : class
     {
-        void Create(T entity);
-
-        T Read(Expression<Func<T, bool>> predicate);
-
-        IQueryable<T> GetAll();
-
-        void Update(T entity);
-
-        void Delete(T entity);
+        void Create(TEntity instance);
+        void Update(TEntity instance);
+        void Delete(int id);
+        TEntity Get(string id);
+        IQueryable<TEntity> GetAll();
 
         void SaveChanges();
     }

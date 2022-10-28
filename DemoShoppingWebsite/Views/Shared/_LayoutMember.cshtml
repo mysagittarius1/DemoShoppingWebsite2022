@@ -37,10 +37,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("產品列表", "Index", "Member", new { @class = "custom custom-link" })</li>
-                    <li>@Html.ActionLink("購物車", "ShoppingCar", "Member", new { @class = "custom custom-link" })</li>
-                    <li>@Html.ActionLink("訂單", "OrderList", "Member", new { @class = "custom custom-link" })</li>
-                    <li>@Html.ActionLink("登出", "LogOut", "Member", new { @class = "custom custom-link" })</li>
+                    <li>@Html.ActionLink("產品列表", "Index", "Member", new { area = "" }, new { @class = "custom custom-link" })</li>
+                    <li>@Html.ActionLink("購物車", "ShoppingCar", "Member", new { area = "" }, new { @class = "custom custom-link" })</li>
+                    <li>@Html.ActionLink("訂單", "OrderList", "Member", new { area = "" }, new { @class = "custom custom-link" })</li>
+                    <li>@Html.ActionLink("登出", "LogOut", "Member", new { area = "" }, new { @class = "custom custom-link" })</li>
                     <li><a href="#">@Session["Welcome"]</a></li>
                 </ul>
             </div>

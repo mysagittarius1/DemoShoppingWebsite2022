@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace DemoShoppingWebsite.Models.Interface
 {
-    public interface IProductRepository
+    public interface IProductRepository:IRepository<table_Product>
     {
-        void Create(table_Product product);
-        void Update(table_Product product);
-        void Delete(table_Product product);
-        table_Product Get(string productId);
-        IQueryable<table_Product> GetAll();
-        void SaveChanges();
+
+        //void Create(table_Product product);
+        //void Update(table_Product product);
+        //void Delete(string productId);
+        //table_Product Get(string productId);
+        //IQueryable<table_Product> GetAll();
+        //void SaveChanges();
     }
 }
