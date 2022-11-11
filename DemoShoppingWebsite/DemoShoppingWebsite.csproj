@@ -142,21 +142,6 @@
     <Compile Include="Models\Repository\OrderDetailRepository.cs" />
     <Compile Include="Models\Repository\OrderRepository.cs" />
     <Compile Include="Models\Repository\ProductRepository.cs" />
-    <Compile Include="Models\ShoppingCar.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ShoppingCar.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ShoppingCar.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ShoppingCar.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ShoppingCar.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ShoppingCar.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\ShoppingCarAzure.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -219,16 +204,6 @@
     <Content Include="image\xiaomi_cleanrobot.jpg" />
     <Content Include="image\xiaomi_remote_monitor.jpg" />
     <Content Include="image\xiaomi_smartring_6.jpg" />
-    <Content Include="Models\ShoppingCar.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ShoppingCar.Context.cs</LastGenOutput>
-      <DependentUpon>ShoppingCar.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\ShoppingCar.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ShoppingCar.edmx</DependentUpon>
-      <LastGenOutput>ShoppingCar.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\ShoppingCarAzure.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ShoppingCarAzure.Context.cs</LastGenOutput>
@@ -238,13 +213,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ShoppingCarAzure.edmx</DependentUpon>
       <LastGenOutput>ShoppingCarAzure.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\ShoppingCar.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ShoppingCar.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ShoppingCar.edmx.diagram">
-      <DependentUpon>ShoppingCar.edmx</DependentUpon>
     </Content>
     <EntityDeploy Include="Models\ShoppingCarAzure.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
