@@ -7,14 +7,9 @@ using System.Xml.Linq;
 
 namespace DemoShoppingWebsite.Models.Repository
 {
-    public class OrderDetailRepository : IOrderDetailRepository
+    public class OrderDetailRepository
     {
         protected dbShoppingCarAzureEntities db = ConnectStringService.CreateDBContext();
-        public void Create(table_OrderDetail instance)
-        {
-            db.table_OrderDetail.Add(instance);
-            this.SaveChanges();
-        }
 
         public void AddNewOrder(string Receiver, string Email, string Address, string userId)
         {
@@ -30,7 +25,8 @@ namespace DemoShoppingWebsite.Models.Repository
             db.table_Order.Add(order);
 
             //訂單加入後，需一併更新訂單明細內容
-            var carList = db.table_OrderDetail.Where(m => m.IsApproved == "否" && m.UserId == userId).ToList();
+            var carList = db.table_OrderDetail.
+                Where(m => m.IsApproved == "否" && m.UserId == userId).ToList();
             foreach (var item in carList)
             {
                 item.OrderGuid = guid;
@@ -45,7 +41,7 @@ namespace DemoShoppingWebsite.Models.Repository
             if (orderDetail != null)
             {
                 db.table_OrderDetail.Remove(orderDetail);
-                this.SaveChanges();
+                db.SaveChanges();
             }
             else
             {
@@ -56,11 +52,6 @@ namespace DemoShoppingWebsite.Models.Repository
         public IEnumerable<table_OrderDetail> GetByGuid(string orderGuid)
         {
             return db.table_OrderDetail.Where(m => m.OrderGuid == orderGuid).ToList();
-        }
-
-        public table_OrderDetail Get(string userid)
-        {
-            return db.table_OrderDetail.Where(x=>x.UserId==userid).FirstOrDefault();
         }
 
         public IQueryable<table_OrderDetail> GetOrderDetails(string userid)
@@ -97,38 +88,6 @@ namespace DemoShoppingWebsite.Models.Repository
 
             //儲存資料庫並導至購物車檢視頁面
             db.SaveChanges();
-        }
-
-        public void SaveChanges()
-        {
-            db.SaveChanges();
-        }
-
-        public void Update(table_OrderDetail instance)
-        {
-            var item = db.table_OrderDetail.
-                    Where(x => x.OrderGuid == instance.OrderGuid).FirstOrDefault();
-            if (item == null)
-            {
-                throw new ArgumentNullException();
-            }
-            else
-            {
-                item.Quantity = instance.Quantity;
-                item.UserId = instance.UserId;
-                item.Price = instance.Price;
-                item.IsApproved = instance.IsApproved;
-                item.Name = instance.Name;
-                this.SaveChanges();
-
-                //db.Entry(product).State = EntityState.Modified;
-                //this.SaveChanges();
-            }
-        }
-
-        public IQueryable<table_OrderDetail> GetAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }
