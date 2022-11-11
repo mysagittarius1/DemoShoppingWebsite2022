@@ -1,5 +1,4 @@
 ﻿using DemoShoppingWebsite.Models;
-using DemoShoppingWebsite.Models.Interface;
 using DemoShoppingWebsite.Models.Repository;
 using System;
 using System.Collections.Generic;
